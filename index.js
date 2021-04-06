@@ -16,6 +16,8 @@ async function scrap() {
   .get('https://prod.chronorace.be/VirtualChallenge/1000Bornes/SoutienClub.aspx?chal=38&eventId=1188112508252308&lng=FR&c=2046&hash=vfRu4mv6nt1-PZyeZcqwCfFMEBo&fbclid=IwAR2bYZ1avbu4QrU-KsQjc5advjeuk76Dyplp-fWIHskaBRn0IMBhDuPFnM8')
   .then(function(tableData) {
       console.log(tableData);
+    total_km=0;
+    total_participants=0;
     data = tableData[0];
     data.shift();
     console.log(total_km);
