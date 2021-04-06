@@ -17,9 +17,9 @@ async function scrap() {
     data = tableData[0];
     data.shift();
     data.forEach(people => {
-        console.log(people);
+        //console.log(people);
         people["4"] = people["4"].slice(0, -2);
-        console.log(people);
+        //console.log(people);
     });
     console.log("Scrapped");
   })
@@ -32,7 +32,7 @@ scrap();
 setInterval(scrap, 300000);
 
 
-app.get('/data', function (req, res) {
+app.get('/data-jmbpmc', function (req, res) {
     var dataToSend = {data : data};
     res.send(dataToSend);
 });
