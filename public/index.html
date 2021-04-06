@@ -61,10 +61,6 @@
         $.ajax({url: "/data-total-participants", success: function(result){
             $("#participants").html(result.total_participants);
         }});
-        ProxyPass /data-total-km http://localhost:5001/data-total-km
- ProxyPassReverse /data-total-km http://localhost:5001/data-total-km
- ProxyPass /data-total-participants http://localhost:5001/data-total-participants
- ProxyPassReverse /data-total-participants http://localhost:5001/data-total-participants
 
         var tableData = $('#example').DataTable( {
 
