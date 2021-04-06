@@ -8,6 +8,8 @@ const webserver = app.listen(5001, '127.0.0.1', function () {
 var scraper = require('table-scraper');
 
 var data;
+var total_km=0;
+var total_participants=0;
 
 async function scrap() {
     return scraper
@@ -16,11 +18,14 @@ async function scrap() {
       console.log(tableData);
     data = tableData[0];
     data.shift();
+    console.log(total_km);
     data.forEach(people => {
-        //console.log(people);
         people["4"] = people["4"].slice(0, -2);
-        //console.log(people);
+        total_km = total_km + (people["4"]=='' ? 0.0 : parseFloat(people["4"]));
+        total_participants = total_participants + (people["3"]=='' ? 0 : 1);
     });
+    console.log(total_km);
+    console.log(total_participants);
     console.log("Scrapped");
   })
   .catch(function (error) {
@@ -34,6 +39,16 @@ setInterval(scrap, 300000);
 
 app.get('/data-jmbpmc', function (req, res) {
     var dataToSend = {data : data};
+    res.send(dataToSend);
+});
+
+app.get('/data-total-km', function (req, res) {
+    var dataToSend = {total_km : total_km};
+    res.send(dataToSend);
+});
+
+app.get('/data-total-participants', function (req, res) {
+    var dataToSend = {total_participants : total_participants};
     res.send(dataToSend);
 });
 

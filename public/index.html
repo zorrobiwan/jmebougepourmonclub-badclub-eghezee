@@ -36,6 +36,8 @@
 <body>
     <H1>J'me Bouge Pour Mon Club (Badclub Eghezée)</H1>
     <h5>Basé sur la page Chronorace : <a href="https://prod.chronorace.be/VirtualChallenge/1000Bornes/SoutienClub.aspx?chal=38&eventId=1188112508252308&lng=FR&c=2046&hash=vfRu4mv6nt1-PZyeZcqwCfFMEBo&fbclid=IwAR2bYZ1avbu4QrU-KsQjc5advjeuk76Dyplp-fWIHskaBRn0IMBhDuPFnM8">Challenge J'me Bouge Pour Mon Club (Badclub Eghezée)</a> - Données mises à jour toutes les 5 minutes</a></h5>
+    <h5>Total km : <span id="km"></span> - Total participants : <span id="participants"></span></h5>
+    
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -50,6 +52,17 @@
     </table>
 <script>
     $(document).ready(function() {
+
+
+        $.ajax({url: "/data-total-km", success: function(result){
+            $("#km").html((Math.round(result.total_km * 100) / 100).toFixed(2));
+        }});
+
+        $.ajax({url: "/data-total-participants", success: function(result){
+            $("#participants").html(result.total_participants);
+        }});
+
+
         var tableData = $('#example').DataTable( {
 
             "ajax": {
